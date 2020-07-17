@@ -10,6 +10,7 @@ import UIKit
 
 class CountriesTableViewController: UITableViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     let countriesVM = CountriesViewModel()
     let countryCellIdentifier = "countryCellIdentifier"
     
@@ -20,11 +21,9 @@ class CountriesTableViewController: UITableViewController {
         
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+ 
         // setup table view
+        setupUI()
         
         // view model callbacks
         getData()
@@ -32,8 +31,12 @@ class CountriesTableViewController: UITableViewController {
         countriesVM.getCountries(searchKey: "egypt")
     }
     
-    func setupTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: countryCellIdentifier)
+    func setupUI() {
+        // register default table view cell
+        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: countryCellIdentifier)
+        
+        // set search bar delegte
+        self.searchBar.delegate = self
     }
 
     
@@ -60,59 +63,27 @@ class CountriesTableViewController: UITableViewController {
         var cell : UITableViewCell!
         cell = tableView.dequeueReusableCell(withIdentifier: countryCellIdentifier)
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: countryCellIdentifier)
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: countryCellIdentifier)
         }
           
         // Configure the cell...
         cell?.textLabel?.text = countriesVM.countriesArray[indexPath.row].name
         
+        let capital = countriesVM.countriesArray[indexPath.row].capital
+        let currency = countriesVM.countriesArray[indexPath.row].currencies.first?.name
+        cell.detailTextLabel?.text = "\(capital), \(currency ?? "")"
+         
         return cell
     }
      
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
-    */
+}
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+extension CountriesTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        countriesVM.getCountries(searchKey: searchText)
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
