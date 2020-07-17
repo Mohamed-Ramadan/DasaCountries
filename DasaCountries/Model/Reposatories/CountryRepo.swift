@@ -15,7 +15,7 @@ class CountryRepo: MainRepository {
         
         let url = Constant.BASE_URL + "name/\(searchKey)"
         
-        ApiCalling.request(requestUrl: url , httpMethod: .post, paramter:[:]) {
+        ApiCalling.request(requestUrl: url , httpMethod: .get, paramter:[:]) {
             (response , responseCode , errMsg) in
             
             if responseCode == 200 {

@@ -15,9 +15,8 @@ class MainRepository {
     var completionHandlerWithError:(_ err:String)->Void = {_ in}
     
     func isValidResponse(response:Any?,getDataFromArrayKey key: String = "data")->(Bool, JSON?){
-        DispatchQueue.global(qos: .default).sync {
-            let jsonResponse = JSON(response ?? "")
-            let result = JSON(jsonResponse[key].arrayValue)
+        DispatchQueue.global(qos: .default).sync { 
+            let result = JSON(response ?? "")
             return (true,result)
         } 
     }

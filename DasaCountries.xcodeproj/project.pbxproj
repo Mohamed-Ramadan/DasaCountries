@@ -230,8 +230,8 @@
 		FA2E666324C2415D00C4A07E /* Reposatories */ = {
 			isa = PBXGroup;
 			children = (
-				FA2E666424C2417500C4A07E /* CountryRepo.swift */,
 				FA2E666624C2423F00C4A07E /* MainRepository.swift */,
+				FA2E666424C2417500C4A07E /* CountryRepo.swift */,
 			);
 			path = Reposatories;
 			sourceTree = "<group>";

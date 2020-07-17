@@ -10,39 +10,65 @@ import UIKit
 
 class CountriesTableViewController: UITableViewController {
 
+    let countriesVM = CountriesViewModel()
+    let countryCellIdentifier = "countryCellIdentifier"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Countries"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        // setup table view
+        
+        // view model callbacks
+        getData()
+        
+        countriesVM.getCountries(searchKey: "egypt")
+    }
+    
+    func setupTableView() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: countryCellIdentifier)
     }
 
+    
+    func getData() {
+        countriesVM.countriesCompleationHandler = {
+            self.tableView.reloadData()
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return countriesVM.countriesArray.count
     }
 
-    /*
+     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        var cell : UITableViewCell!
+        cell = tableView.dequeueReusableCell(withIdentifier: countryCellIdentifier)
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: countryCellIdentifier)
+        }
+          
         // Configure the cell...
-
+        cell?.textLabel?.text = countriesVM.countriesArray[indexPath.row].name
+        
         return cell
     }
-    */
+     
 
     /*
     // Override to support conditional editing of the table view.
