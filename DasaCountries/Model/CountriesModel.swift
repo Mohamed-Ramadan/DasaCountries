@@ -38,6 +38,6 @@ struct Language: Codable {
     }
 }
  
-typealias CountriesResponse = [Country]
+typealias CountriesModel = [Country]
 
  
