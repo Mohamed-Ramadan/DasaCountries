@@ -12,7 +12,9 @@ class CountriesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Countries"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

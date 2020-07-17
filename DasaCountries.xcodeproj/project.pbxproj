@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		FA2E662524C23C1E00C4A07E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E662424C23C1E00C4A07E /* AppDelegate.swift */; };
 		FA2E662724C23C1E00C4A07E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E662624C23C1E00C4A07E /* SceneDelegate.swift */; };
-		FA2E662924C23C1E00C4A07E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E662824C23C1E00C4A07E /* ViewController.swift */; };
 		FA2E662C24C23C1E00C4A07E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2E662A24C23C1E00C4A07E /* Main.storyboard */; };
 		FA2E662F24C23C1E00C4A07E /* DasaCountries.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA2E662D24C23C1E00C4A07E /* DasaCountries.xcdatamodeld */; };
 		FA2E663124C23C2000C4A07E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA2E663024C23C2000C4A07E /* Assets.xcassets */; };
 		FA2E663424C23C2000C4A07E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2E663224C23C2000C4A07E /* LaunchScreen.storyboard */; };
 		FA2E663F24C23C2000C4A07E /* DasaCountriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E663E24C23C2000C4A07E /* DasaCountriesTests.swift */; };
 		FA2E664A24C23C2000C4A07E /* DasaCountriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E664924C23C2000C4A07E /* DasaCountriesUITests.swift */; };
+		FA2E665824C23C7600C4A07E /* CountriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E665724C23C7600C4A07E /* CountriesTableViewController.swift */; };
+		FA2E665E24C23EAD00C4A07E /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E665D24C23EAD00C4A07E /* Country.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,6 @@
 		FA2E662124C23C1E00C4A07E /* DasaCountries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DasaCountries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2E662424C23C1E00C4A07E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA2E662624C23C1E00C4A07E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FA2E662824C23C1E00C4A07E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA2E662B24C23C1E00C4A07E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA2E662E24C23C1E00C4A07E /* DasaCountries.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DasaCountries.xcdatamodel; sourceTree = "<group>"; };
 		FA2E663024C23C2000C4A07E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		FA2E664524C23C2000C4A07E /* DasaCountriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DasaCountriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2E664924C23C2000C4A07E /* DasaCountriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DasaCountriesUITests.swift; sourceTree = "<group>"; };
 		FA2E664B24C23C2000C4A07E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA2E665724C23C7600C4A07E /* CountriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesTableViewController.swift; sourceTree = "<group>"; };
+		FA2E665D24C23EAD00C4A07E /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +103,11 @@
 		FA2E662324C23C1E00C4A07E /* DasaCountries */ = {
 			isa = PBXGroup;
 			children = (
+				FA2E665B24C23E4800C4A07E /* ViewModel */,
+				FA2E665A24C23E4100C4A07E /* Views */,
+				FA2E665924C23E3B00C4A07E /* Model */,
 				FA2E662424C23C1E00C4A07E /* AppDelegate.swift */,
 				FA2E662624C23C1E00C4A07E /* SceneDelegate.swift */,
-				FA2E662824C23C1E00C4A07E /* ViewController.swift */,
 				FA2E662A24C23C1E00C4A07E /* Main.storyboard */,
 				FA2E663024C23C2000C4A07E /* Assets.xcassets */,
 				FA2E663224C23C2000C4A07E /* LaunchScreen.storyboard */,
@@ -129,6 +133,37 @@
 				FA2E664B24C23C2000C4A07E /* Info.plist */,
 			);
 			path = DasaCountriesUITests;
+			sourceTree = "<group>";
+		};
+		FA2E665924C23E3B00C4A07E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA2E665D24C23EAD00C4A07E /* Country.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA2E665A24C23E4100C4A07E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA2E665C24C23E5300C4A07E /* Cells */,
+				FA2E665724C23C7600C4A07E /* CountriesTableViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA2E665B24C23E4800C4A07E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA2E665C24C23E5300C4A07E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +297,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA2E662924C23C1E00C4A07E /* ViewController.swift in Sources */,
 				FA2E662524C23C1E00C4A07E /* AppDelegate.swift in Sources */,
 				FA2E662724C23C1E00C4A07E /* SceneDelegate.swift in Sources */,
+				FA2E665824C23C7600C4A07E /* CountriesTableViewController.swift in Sources */,
+				FA2E665E24C23EAD00C4A07E /* Country.swift in Sources */,
 				FA2E662F24C23C1E00C4A07E /* DasaCountries.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
