@@ -31,6 +31,7 @@
 		FA2E667324C2742F00C4A07E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */; };
 		FA2E667524C2770400C4A07E /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667424C2770400C4A07E /* MainTableViewController.swift */; };
 		FA2E667724C2773000C4A07E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667624C2773000C4A07E /* MainViewModel.swift */; };
+		FA2E667924C2811B00C4A07E /* CountryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667824C2811B00C4A07E /* CountryDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		FA2E667424C2770400C4A07E /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		FA2E667624C2773000C4A07E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		FA2E667824C2811B00C4A07E /* CountryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				FA2E665C24C23E5300C4A07E /* Cells */,
 				FA2E665724C23C7600C4A07E /* CountriesTableViewController.swift */,
 				FA2E667424C2770400C4A07E /* MainTableViewController.swift */,
+				FA2E667824C2811B00C4A07E /* CountryDetailsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				FA2E665824C23C7600C4A07E /* CountriesTableViewController.swift in Sources */,
 				FA2E665E24C23EAD00C4A07E /* CountriesModel.swift in Sources */,
 				FA2E666024C2405500C4A07E /* ViewModel.swift in Sources */,
+				FA2E667924C2811B00C4A07E /* CountryDetailsViewController.swift in Sources */,
 				FA2E667124C2499A00C4A07E /* CodableHandler.swift in Sources */,
 				FA2E666C24C244D900C4A07E /* Reachability.swift in Sources */,
 				FA2E667324C2742F00C4A07E /* UITableView+Extension.swift in Sources */,

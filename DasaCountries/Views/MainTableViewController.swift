@@ -80,6 +80,14 @@ class MainTableViewController: UITableViewController {
         return UIView()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCountry = mainViewModel.countriesArray[indexPath.row]
+        
+        if let countryDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryDetailsViewController") as? CountryDetailsViewController {
+            countryDetailsVC.country = selectedCountry
+            self.navigationController?.pushViewController(countryDetailsVC, animated: true)
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
