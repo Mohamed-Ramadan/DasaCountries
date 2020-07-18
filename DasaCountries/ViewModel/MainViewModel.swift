@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cache
 
 class MainViewModel: ViewModel {
     static let shared = MainViewModel()
@@ -17,6 +18,10 @@ class MainViewModel: ViewModel {
     var showCantAddMoreThan5CountriesError: ()->() = {}
     var updateCountryDetailsNavigationBarButtonToUndo:()->() = {}
     var updateCountryDetailsNavigationBarButtonToAdd:()->() = {}
+    
+    let countriesStoredKey = "countriesStoredKey"
+    let diskConfig = DiskConfig(name: "Floppy")
+    let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
     
     override init() {
         super.init()
@@ -37,6 +42,8 @@ class MainViewModel: ViewModel {
         countriesArray.append(country)
         self.reloadTablwView()
         self.updateCountryDetailsNavigationBarButtonToUndo()
+        self.refreshStoredCountries()
+        self.refreshStoredCountries()
     }
     
     func removeCountry(_ country: Country) {
@@ -45,28 +52,76 @@ class MainViewModel: ViewModel {
             countriesArray.remove(at: index)
             self.reloadTablwView()
             self.updateCountryDetailsNavigationBarButtonToAdd()
+            self.refreshStoredCountries()
+        }
+    }
+    
+    func refreshStoredCountries() {
+        // store countries into Cache
+        let storage = try? Storage (
+            diskConfig: diskConfig,
+            memoryConfig: memoryConfig,
+            transformer: TransformerFactory.forCodable(ofType: [Country].self))
+        do {
+            try storage?.setObject(self.countriesArray, forKey: countriesStoredKey)
+        } catch {
+            print("error \(error.localizedDescription)")
         }
     }
     
     func loadCountires() {
-        let storedCountries = fetchStoredCountries()
+        let storage = try? Storage(
+          diskConfig: diskConfig,
+          memoryConfig: memoryConfig,
+          transformer: TransformerFactory.forCodable(ofType: [Country].self)
+        )
+ 
+        storage?.async.object(forKey: countriesStoredKey) { result in
+            switch result {
+            case .value(let countries):
+                DispatchQueue.main.async {
+                    self.countriesArray = countries
+                    self.handleStoredData()
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
         
-        if storedCountries.count == 0 {
+        fetchStoredCountries { (countries) in
+        }
+    }
+    
+    func handleStoredData() {
+        if self.countriesStoredKey.count == 0 {
             // TODO: check location permission to load user country
             // if user did not give access before, then add Egypt as default country
             let egypt = Country(status: 200, message: nil, name: "Egypt", capital: "Cairo", currencies: [Currency(code: "EGP", name: "Egyptian Pound", symbol: "£")])
-            self.addCountry(egypt)
+            DispatchQueue.main.async {
+                self.addCountry(egypt)
+            }
         }
         
-        self.reloadTablwView()
+        DispatchQueue.main.async {
+            self.reloadTablwView()
+        }
     }
     
-    func fetchStoredCountries() -> [Country] {
-        // TODO: fetch countries from storage
-        return []
-    }
-    
-    func storeCountry() {
-        // TODO: add country to storage
+    func fetchStoredCountries(_ complation:@escaping (([Country])->Void)) {
+        // fetch countries from storage
+        let storage = try? Storage(
+            diskConfig: diskConfig,
+            memoryConfig: memoryConfig,
+            transformer: TransformerFactory.forCodable(ofType: [Country].self))
+
+        storage?.async.object(forKey: countriesStoredKey) { result in
+            switch result {
+            case .value(let countries):
+                complation(countries)
+            case .error(let error):
+                print(error)
+                complation([])
+            }
+        }
     }
 }

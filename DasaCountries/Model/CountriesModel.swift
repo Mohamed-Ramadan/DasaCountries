@@ -16,13 +16,22 @@ struct Country: Codable {
     let message: String?
     let name: String?
     let capital: String?
-    let currencies: [Currency]? 
+    let currencies: [Currency]?
+    
+    enum CodingKeys: String, CodingKey {
+        case status, message
+        case name, capital, currencies
+    }
 }
 
 // MARK: - Currency
 struct Currency: Codable {
     let code, name: String?
-    let symbol: String? 
+    let symbol: String?
+    
+    enum CodingKeys: String, CodingKey { 
+        case name, symbol, code
+    }
 }
 
 
