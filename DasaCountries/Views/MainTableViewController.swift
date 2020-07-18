@@ -10,7 +10,7 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
-    let mainViewModel = MainViewModel()
+    //let mainViewModel = MainViewModel()
     let countryCellIdentifier = "countryCellIdentifier"
     
     override func viewDidLoad() {
@@ -18,30 +18,28 @@ class MainTableViewController: UITableViewController {
 
         self.title = "Countries" 
     
+        setupUI()
+        
         // view model callbacks
         getData()
         
         // load countries
-        mainViewModel.loadCountires() 
+        MainViewModel.shared.loadCountires()
+    }
+    
+    func setupUI() {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.didClickSearchButton))
+        self.navigationItem.setRightBarButtonItems([addButton], animated: true)
     }
     
     func getData() {  
-        mainViewModel.compleationHandlerWithError = {
+        MainViewModel.shared.compleationHandlerWithError = {
             self.tableView.reloadData()
         }
         
-        mainViewModel.reloadTablwView = {
+        MainViewModel.shared.reloadTablwView = {
             self.tableView.reloadData()
-        }
-        
-        mainViewModel.showAddButton = {
-            let addButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.didClickSearchButton))
-            self.navigationItem.setRightBarButtonItems([addButton], animated: true)
-        }
-        
-        mainViewModel.hideAddButton = {
-            self.navigationItem.rightBarButtonItems?.removeAll()
-        }
+        } 
     }
     
     // MARK: - Button Actions
@@ -55,7 +53,7 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return mainViewModel.countriesArray.count
+        return MainViewModel.shared.countriesArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,10 +64,10 @@ class MainTableViewController: UITableViewController {
         }
           
         // Configure the cell...
-        cell?.textLabel?.text = mainViewModel.countriesArray[indexPath.row].name
+        cell?.textLabel?.text = MainViewModel.shared.countriesArray[indexPath.row].name
         
-        let capital = mainViewModel.countriesArray[indexPath.row].capital ?? ""
-        let currency = mainViewModel.countriesArray[indexPath.row].currencies?.first?.name ?? ""
+        let capital = MainViewModel.shared.countriesArray[indexPath.row].capital ?? ""
+        let currency = MainViewModel.shared.countriesArray[indexPath.row].currencies?.first?.name ?? ""
         cell.detailTextLabel?.text = "\(capital), \(currency)"
          
         return cell
@@ -80,7 +78,7 @@ class MainTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCountry = mainViewModel.countriesArray[indexPath.row]
+        let selectedCountry = MainViewModel.shared.countriesArray[indexPath.row]
         
         if let countryDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryDetailsViewController") as? CountryDetailsViewController {
             countryDetailsVC.country = selectedCountry

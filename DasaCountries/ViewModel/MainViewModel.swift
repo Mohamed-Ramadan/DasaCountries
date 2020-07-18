@@ -14,8 +14,9 @@ class MainViewModel: ViewModel {
     private(set) var countriesArray = [Country]()
      
     var reloadTablwView:()->() = {}
-    var showAddButton: ()->() = {}
-    var hideAddButton:()->() = {}
+    var showCantAddMoreThan5CountriesError: ()->() = {}
+    var updateCountryDetailsNavigationBarButtonToUndo:()->() = {}
+    var updateCountryDetailsNavigationBarButtonToAdd:()->() = {}
     
     override init() {
         super.init()
@@ -26,20 +27,25 @@ class MainViewModel: ViewModel {
     }
   
     func addCountry(_ country: Country) {
-        countriesArray.append(country)
-        self.reloadTablwView()
-        
+        // check for only 5 countries in main view
         if countriesArray.count == 5 {
-            self.hideAddButton()
-        } else {
-            self.showAddButton()
+            self.showCantAddMoreThan5CountriesError()
+            return
         }
         
+        // add this country to main counntries list
+        countriesArray.append(country)
+        self.reloadTablwView()
+        self.updateCountryDetailsNavigationBarButtonToUndo()
     }
     
-    func removeCountryAtIndex(_ index: Int) {
-        countriesArray.remove(at: index)
-        self.reloadTablwView()
+    func removeCountry(_ country: Country) {
+        // get index of this country
+        if let index = countriesArray.firstIndex(where: {$0.name == country.name}) {
+            countriesArray.remove(at: index)
+            self.reloadTablwView()
+            self.updateCountryDetailsNavigationBarButtonToAdd()
+        }
     }
     
     func loadCountires() {

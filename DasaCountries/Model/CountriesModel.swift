@@ -16,7 +16,7 @@ struct Country: Codable {
     let message: String?
     let name: String?
     let capital: String?
-    let currencies: [Currency]?
+    let currencies: [Currency]? 
 }
 
 // MARK: - Currency

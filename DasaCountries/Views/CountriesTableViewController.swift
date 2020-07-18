@@ -81,12 +81,7 @@ class CountriesTableViewController: UITableViewController {
          
         return cell
     }
-     
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
+  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCountry = countriesVM.countriesArray[indexPath.row]
         
