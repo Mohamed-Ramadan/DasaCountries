@@ -16,8 +16,7 @@ class CountriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Search Countries"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Search Countries" 
         
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
@@ -86,6 +85,15 @@ class CountriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCountry = countriesVM.countriesArray[indexPath.row]
+        
+        if let countryDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryDetailsViewController") as? CountryDetailsViewController {
+            countryDetailsVC.country = selectedCountry
+            self.navigationController?.pushViewController(countryDetailsVC, animated: true)
+        }
     }
 }
 

@@ -17,9 +17,12 @@ class CountryDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         if let country = self.country {
+            // navigation bar title
+            self.title = country.name
+            
             capitalLabel.text = country.capital
             
             let currenyName = country.currencies?.first?.name

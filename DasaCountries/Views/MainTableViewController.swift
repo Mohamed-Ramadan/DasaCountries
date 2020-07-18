@@ -16,8 +16,7 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Countries"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Countries" 
     
         // view model callbacks
         getData()
@@ -41,7 +40,7 @@ class MainTableViewController: UITableViewController {
         }
         
         mainViewModel.hideAddButton = {
-            
+            self.navigationItem.rightBarButtonItems?.removeAll()
         }
     }
     
