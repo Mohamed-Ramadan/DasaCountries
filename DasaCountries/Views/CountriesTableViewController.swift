@@ -87,7 +87,9 @@ class CountriesTableViewController: UITableViewController {
         
         if let countryDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryDetailsViewController") as? CountryDetailsViewController {
             countryDetailsVC.country = selectedCountry
-            self.navigationController?.pushViewController(countryDetailsVC, animated: true)
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(countryDetailsVC, animated: true)
+            } 
         }
     }
 }
