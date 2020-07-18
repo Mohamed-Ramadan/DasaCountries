@@ -29,6 +29,8 @@
 		FA2E666F24C247F600C4A07E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E666E24C247F600C4A07E /* Constant.swift */; };
 		FA2E667124C2499A00C4A07E /* CodableHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667024C2499A00C4A07E /* CodableHandler.swift */; };
 		FA2E667324C2742F00C4A07E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */; };
+		FA2E667524C2770400C4A07E /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667424C2770400C4A07E /* MainTableViewController.swift */; };
+		FA2E667724C2773000C4A07E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667624C2773000C4A07E /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		FA2E666E24C247F600C4A07E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		FA2E667024C2499A00C4A07E /* CodableHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableHandler.swift; sourceTree = "<group>"; };
 		FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		FA2E667424C2770400C4A07E /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		FA2E667624C2773000C4A07E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 			children = (
 				FA2E665C24C23E5300C4A07E /* Cells */,
 				FA2E665724C23C7600C4A07E /* CountriesTableViewController.swift */,
+				FA2E667424C2770400C4A07E /* MainTableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 			children = (
 				FA2E665F24C2405500C4A07E /* ViewModel.swift */,
 				FA2E666124C2407500C4A07E /* CountriesViewModel.swift */,
+				FA2E667624C2773000C4A07E /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -509,7 +515,9 @@
 				FA2E666524C2417500C4A07E /* CountryRepo.swift in Sources */,
 				FA2E662F24C23C1E00C4A07E /* DasaCountries.xcdatamodeld in Sources */,
 				FA2E666724C2423F00C4A07E /* MainRepository.swift in Sources */,
+				FA2E667524C2770400C4A07E /* MainTableViewController.swift in Sources */,
 				FA2E666F24C247F600C4A07E /* Constant.swift in Sources */,
+				FA2E667724C2773000C4A07E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

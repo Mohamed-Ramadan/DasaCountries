@@ -26,9 +26,7 @@ class CountriesTableViewController: UITableViewController {
         setupUI()
         
         // view model callbacks
-        getData()
-        
-        countriesVM.getCountries(searchKey: "d")
+        getData() 
     }
     
     func setupUI() {
