@@ -69,7 +69,7 @@ class ApiCalling {
                         """ )
                     
                     if statusCode == 200 {
-                        Result(requestResult, statusCode ?? 0 , nil)
+                        Result(response.data, statusCode ?? 0 , nil)
                     } else {
                         do {
                             guard let jsonResponse = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {return}

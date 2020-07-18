@@ -28,6 +28,7 @@
 		FA2E666C24C244D900C4A07E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E666B24C244D900C4A07E /* Reachability.swift */; };
 		FA2E666F24C247F600C4A07E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E666E24C247F600C4A07E /* Constant.swift */; };
 		FA2E667124C2499A00C4A07E /* CodableHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667024C2499A00C4A07E /* CodableHandler.swift */; };
+		FA2E667324C2742F00C4A07E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		FA2E666B24C244D900C4A07E /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FA2E666E24C247F600C4A07E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		FA2E667024C2499A00C4A07E /* CodableHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableHandler.swift; sourceTree = "<group>"; };
+		FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				FA2E666E24C247F600C4A07E /* Constant.swift */,
+				FA2E667224C2742F00C4A07E /* UITableView+Extension.swift */,
 			);
 			path = Utilites;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				FA2E666024C2405500C4A07E /* ViewModel.swift in Sources */,
 				FA2E667124C2499A00C4A07E /* CodableHandler.swift in Sources */,
 				FA2E666C24C244D900C4A07E /* Reachability.swift in Sources */,
+				FA2E667324C2742F00C4A07E /* UITableView+Extension.swift in Sources */,
 				FA2E666524C2417500C4A07E /* CountryRepo.swift in Sources */,
 				FA2E662F24C23C1E00C4A07E /* DasaCountries.xcdatamodeld in Sources */,
 				FA2E666724C2423F00C4A07E /* MainRepository.swift in Sources */,

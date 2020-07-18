@@ -16,7 +16,7 @@ class CountriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Countries"
+        self.title = "Search Countries"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Uncomment the following line to preserve selection between presentations
@@ -28,33 +28,42 @@ class CountriesTableViewController: UITableViewController {
         // view model callbacks
         getData()
         
-        countriesVM.getCountries(searchKey: "egypt")
+        countriesVM.getCountries(searchKey: "d")
     }
     
     func setupUI() {
         // register default table view cell
-        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: countryCellIdentifier)
+        tableView.keyboardDismissMode = .onDrag
+        self.setPleceholderMessageForEmptyCountriesList()
         
         // set search bar delegte
         self.searchBar.delegate = self
     }
 
+    func setPleceholderMessageForEmptyCountriesList() {
+        tableView.setEmptyMessage("There is no search result.", image: #imageLiteral(resourceName: "no_search_result"))
+    }
     
     func getData() {
         countriesVM.countriesCompleationHandler = {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+        countriesVM.compleationHandlerWithError = {
             self.tableView.reloadData()
         }
     }
     
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if countriesVM.countriesArray.count > 0 {
+            tableView.restore()
+        } else {
+            self.setPleceholderMessageForEmptyCountriesList()
+        }
+         
         return countriesVM.countriesArray.count
     }
 
@@ -69,9 +78,9 @@ class CountriesTableViewController: UITableViewController {
         // Configure the cell...
         cell?.textLabel?.text = countriesVM.countriesArray[indexPath.row].name
         
-        let capital = countriesVM.countriesArray[indexPath.row].capital
-        let currency = countriesVM.countriesArray[indexPath.row].currencies.first?.name
-        cell.detailTextLabel?.text = "\(capital), \(currency ?? "")"
+        let capital = countriesVM.countriesArray[indexPath.row].capital ?? ""
+        let currency = countriesVM.countriesArray[indexPath.row].currencies?.first?.name ?? ""
+        cell.detailTextLabel?.text = "\(capital), \(currency)"
          
         return cell
     }
@@ -84,6 +93,12 @@ class CountriesTableViewController: UITableViewController {
 
 extension CountriesTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            countriesVM.reformatData()
+            self.tableView.reloadData()
+            return
+        }
+        
         countriesVM.getCountries(searchKey: searchText)
     }
 }

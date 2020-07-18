@@ -29,12 +29,16 @@ class CountriesViewModel: ViewModel {
          
         coutriesRepo.getReomte(searchKey: searchKey , onComplete: {
             countryList in
+            
             if countryList != nil {
                 self.countriesArray = countryList ?? []
                 self.countriesCompleationHandler()
                 return
-            }
-            self.compleationHandlerWithError()
+            } else {
+                // there is an error or search return with no countries
+                self.countriesArray.removeAll()
+                self.compleationHandlerWithError()
+            } 
         })
     } 
 }

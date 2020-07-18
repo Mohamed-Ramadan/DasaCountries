@@ -11,33 +11,40 @@ import Foundation
 import Foundation
 
 // MARK: - WelcomeElement
-struct Country: Codable {
-    let name: String
-    let capital: String
-    let region, subregion: String
-    let area: Int
-    let nativeName, numericCode: String
-    let currencies: [Currency]
-    let languages: [Language]
-    let flag: String
-    let cioc: String
+class Country: Codable {
+    let status: Int?
+    let message: String?
+    let name: String?
+    let capital: String?
+    let currencies: [Currency]?
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        capital = try values.decodeIfPresent(String.self, forKey: .capital)
+        currencies = try values.decodeIfPresent([Currency].self, forKey: .currencies)
+        status = try values.decodeIfPresent(Int.self, forKey: .status)
+        message = try values.decodeIfPresent(String.self, forKey: .message)
+    }
+    
 }
 
 // MARK: - Currency
-struct Currency: Codable {
-    let code, name: String
+class Currency: Codable {
+    let code, name: String?
     let symbol: String?
-}
-
-// MARK: - Language
-struct Language: Codable {
-    let name, nativeName: String
-
-    enum CodingKeys: String, CodingKey {
-        case name, nativeName
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        name = try values.decodeIfPresent(String.self, forKey: .name)
+        code = try values.decodeIfPresent(String.self, forKey: .code)
+        symbol = try values.decodeIfPresent(String.self, forKey: .symbol)
     }
 }
- 
+
+
 typealias CountriesModel = [Country]
 
  
