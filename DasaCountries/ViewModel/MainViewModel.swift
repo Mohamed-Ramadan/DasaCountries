@@ -8,6 +8,7 @@
 
 import Foundation
 import Cache
+import CoreLocation
 
 class MainViewModel: ViewModel {
     static let shared = MainViewModel()
@@ -85,6 +86,7 @@ class MainViewModel: ViewModel {
                 }
             case .error(let error):
                 print(error)
+                self.handleStoredData()
             }
         }
         
@@ -96,14 +98,37 @@ class MainViewModel: ViewModel {
         if self.countriesStoredKey.count == 0 {
             // TODO: check location permission to load user country
             // if user did not give access before, then add Egypt as default country
-            let egypt = Country(status: 200, message: nil, name: "Egypt", capital: "Cairo", currencies: [Currency(code: "EGP", name: "Egyptian Pound", symbol: "£")])
-            DispatchQueue.main.async {
-                self.addCountry(egypt)
+            if CLLocationManager.locationServicesEnabled() {
+                switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    print("No access")
+                    self.addDefaultCountry()
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Access")
+                @unknown default:
+                    break
+                }
+            } else {
+                print("Location services are not enabled")
+                self.addDefaultCountry()
             }
         }
         
         DispatchQueue.main.async {
             self.reloadTablwView()
+        }
+    }
+    
+    func addDefaultCountry() {
+        let egypt = Country(status: 200,
+                            message: nil,
+                            name: "Egypt",
+                            capital: "Cairo",
+                            currencies: [Currency(code: "EGP",
+                                                  name: "Egyptian Pound",
+                                                  symbol: "£")])
+        DispatchQueue.main.async {
+            self.addCountry(egypt)
         }
     }
     

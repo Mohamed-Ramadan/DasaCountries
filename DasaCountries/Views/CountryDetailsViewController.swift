@@ -43,7 +43,7 @@ class CountryDetailsViewController: UIViewController {
     
     func getData() {
         MainViewModel.shared.showCantAddMoreThan5CountriesError = {
-            let alert = UIAlertController(title: "Error", message: "You can add only 5 countries to Main View", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Attention", message: "You can add only 5 countries to Main View", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainTableViewController: UITableViewController {
 
     //let mainViewModel = MainViewModel()
     let countryCellIdentifier = "countryCellIdentifier"
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "Countries" 
     
+        setupLocationManager()
+        
         setupUI()
         
         // view model callbacks
@@ -25,6 +29,15 @@ class MainTableViewController: UITableViewController {
         
         // load countries
         MainViewModel.shared.loadCountires()
+    }
+  
+    func setupLocationManager() {
+        // Ask for Authorisation from the User.
+        locationManager.requestAlwaysAuthorization()
+          
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation() 
     }
     
     func setupUI() {
@@ -107,4 +120,46 @@ class MainTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     } 
+}
+
+extension MainTableViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+         
+        switch status {
+        case .notDetermined, .restricted, .denied:
+            print("No access")
+            MainViewModel.shared.addDefaultCountry()
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("Access")
+        @unknown default:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation :CLLocation = locations[0] as CLLocation
+
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+ 
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+            if (error != nil){
+                print("error in reverseGeocode")
+            }
+            let placemark = placemarks! as [CLPlacemark]
+            if placemark.count>0{
+                let placemark = placemarks![0]
+                print(placemark.locality!)
+                print(placemark.administrativeArea!)
+                print(placemark.country!)
+
+                if MainViewModel.shared.countriesArray.count == 0 {
+                    let country = Country(status: nil, message: nil, name: placemark.country ?? "", capital: placemark.administrativeArea ?? "", currencies: [Currency(code: nil, name: "", symbol: "")])
+                    MainViewModel.shared.addCountry(country)
+                }
+                 
+            }
+        }
+    }
 }
