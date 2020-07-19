@@ -50,23 +50,33 @@ class CountryDetailsViewController: UIViewController {
         
         MainViewModel.shared.updateCountryDetailsNavigationBarButtonToAdd = {
             self.addAddToMainButton()
+            self.backToMainView()
         }
         
         MainViewModel.shared.updateCountryDetailsNavigationBarButtonToUndo = {
             self.addRemoveFromMainButton()
-        } 
+            self.backToMainView()
+        }
     }
     
     func addAddToMainButton() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.didClickAddButton))
-        self.navigationItem.setRightBarButtonItems([addButton], animated: true)
+        let addToMainBtn = UIBarButtonItem(title: "Add To Main", style: .plain, target: self, action: #selector(self.didClickAddButton))
+        self.navigationItem.setRightBarButtonItems([addToMainBtn], animated: true)
     }
     
     func addRemoveFromMainButton() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .redo, target: self, action: #selector(self.didClickRemoveButton))
-        self.navigationItem.setRightBarButtonItems([addButton], animated: true)
+        let removeToMainBtn = UIBarButtonItem(title: "Remove", style: .plain, target: self, action: #selector(self.didClickRemoveButton))
+        self.navigationItem.setRightBarButtonItems([removeToMainBtn], animated: true)
     }
     
+    func backToMainView() {
+        for vc in self.navigationController?.viewControllers ?? [] {
+            if vc.isKind(of: MainTableViewController.self) {
+                self.navigationController?.popToViewController(vc, animated: true)
+                break
+            }
+        }
+    }
     // MARK: - Button Actions
     @objc func didClickAddButton() {
         if let country = self.country { 
