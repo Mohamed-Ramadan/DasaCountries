@@ -54,8 +54,7 @@ class CountryDetailsViewController: UIViewController {
         
         MainViewModel.shared.updateCountryDetailsNavigationBarButtonToUndo = {
             self.addRemoveFromMainButton()
-        }
-        
+        } 
     }
     
     func addAddToMainButton() {

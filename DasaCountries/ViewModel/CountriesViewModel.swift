@@ -14,7 +14,7 @@ class CountriesViewModel: ViewModel {
     private(set) var countriesArray = [Country]()
     
     var countriesCompleationHandler:()->() = {}
- 
+    var countryByCodeCompleationHandler:(Country)->() = {_ in}
     
     override init() {
         super.init()
@@ -27,7 +27,7 @@ class CountriesViewModel: ViewModel {
     func getCountries(searchKey: String){
         let coutriesRepo = CountryRepo()
          
-        coutriesRepo.getReomte(searchKey: searchKey , onComplete: {
+        coutriesRepo.getCountryBySearchKey(searchKey , onComplete: {
             countryList in
             
             if countryList != nil {
@@ -40,5 +40,21 @@ class CountriesViewModel: ViewModel {
                 self.compleationHandlerWithError()
             } 
         })
-    } 
+    }
+    
+    func getCountyByCode(_ code: String){
+        let coutriesRepo = CountryRepo()
+         
+        coutriesRepo.getCountryByCode(code , onComplete: {
+            country in
+            
+            if let country = country {
+                self.countryByCodeCompleationHandler(country)
+                return
+            } else {
+                // there is an error or search return with no countries
+                self.compleationHandlerWithError()
+            }
+        })
+    }
 }

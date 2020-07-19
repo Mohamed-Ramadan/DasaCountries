@@ -14,14 +14,13 @@ class MainTableViewController: UITableViewController {
     //let mainViewModel = MainViewModel()
     let countryCellIdentifier = "countryCellIdentifier"
     let locationManager = CLLocationManager()
+    var isLocationLoaded = false
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+        super.viewDidLoad() 
         self.title = "Countries" 
     
         setupLocationManager()
-        
         setupUI()
         
         // view model callbacks
@@ -55,7 +54,11 @@ class MainTableViewController: UITableViewController {
         
         MainViewModel.shared.reloadTablwView = {
             self.tableView.reloadData()
-        } 
+        }
+        
+        CountriesViewModel.shared.countryByCodeCompleationHandler = { country in
+            MainViewModel.shared.addCountry(country)
+        }
     }
     
     // MARK: - Button Actions
@@ -66,7 +69,6 @@ class MainTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return MainViewModel.shared.countriesArray.count
@@ -109,8 +111,6 @@ class MainTableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-     
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -129,7 +129,10 @@ extension MainTableViewController: CLLocationManagerDelegate {
         switch status {
         case .notDetermined, .restricted, .denied:
             print("No access")
-            MainViewModel.shared.addDefaultCountry()
+            // load Egypt Details as a default country
+            if MainViewModel.shared.countriesArray.count == 0 {
+                CountriesViewModel.shared.getCountyByCode("eg")
+            } 
         case .authorizedAlways, .authorizedWhenInUse:
             print("Access")
         @unknown default:
@@ -143,26 +146,34 @@ extension MainTableViewController: CLLocationManagerDelegate {
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
  
+        if !isLocationLoaded {
+            isLocationLoaded = true
+        } else {
+            return
+        }
+        
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
             if (error != nil){
                 print("error in reverseGeocode")
             }
             let placemark = placemarks! as [CLPlacemark]
-            if placemark.count>0{
+            if placemark.count > 0 {
                 let placemark = placemarks![0]
-                print(placemark.locality!)
-                print(placemark.administrativeArea!)
-                print(placemark.country!)
-
-                if MainViewModel.shared.countriesArray.count == 0 {
-                    let country = Country(status: nil, message: nil, name: placemark.country ?? "", capital: placemark.administrativeArea ?? "", currencies: [Currency(code: nil, name: "", symbol: "")])
-                    MainViewModel.shared.addCountry(country)
-                    self.locationManager.stopUpdatingLocation()
-                } else {
-                    self.locationManager.stopUpdatingLocation()
-                }
+                print(placemark.locality ?? "No Locality Founded")
+                print(placemark.administrativeArea ?? "No AdministrativeArea Founded")
+                print(placemark.country ?? "No Country Name Founded")
+                print(placemark.isoCountryCode ?? "No Country Code Founded")
                  
+                if MainViewModel.shared.countriesArray.count == 0 {
+                    // load country details by country code
+                    // if country code no avaliable, then get Egypt details by code "eg"
+                    CountriesViewModel.shared.getCountyByCode(placemark.isoCountryCode ?? "eg")
+                }
+                
+                // stop updating location
+                self.locationManager.stopUpdatingLocation()
+                return
             }
         }
     }
