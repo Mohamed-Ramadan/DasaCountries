@@ -32,6 +32,7 @@
 		FA2E667524C2770400C4A07E /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667424C2770400C4A07E /* MainTableViewController.swift */; };
 		FA2E667724C2773000C4A07E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667624C2773000C4A07E /* MainViewModel.swift */; };
 		FA2E667924C2811B00C4A07E /* CountryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E667824C2811B00C4A07E /* CountryDetailsViewController.swift */; };
+		FA75F19124C4C156004E81AC /* Countries.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA75F19024C4C156004E81AC /* Countries.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		FA2E667424C2770400C4A07E /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		FA2E667624C2773000C4A07E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FA2E667824C2811B00C4A07E /* CountryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewController.swift; sourceTree = "<group>"; };
+		FA75F19024C4C156004E81AC /* Countries.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Countries.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				FA2E663024C23C2000C4A07E /* Assets.xcassets */,
 				FA2E663224C23C2000C4A07E /* LaunchScreen.storyboard */,
 				FA2E663524C23C2000C4A07E /* Info.plist */,
+				FA75F19024C4C156004E81AC /* Countries.plist */,
 				FA2E662D24C23C1E00C4A07E /* DasaCountries.xcdatamodeld */,
 			);
 			path = DasaCountries;
@@ -376,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2E663424C23C2000C4A07E /* LaunchScreen.storyboard in Resources */,
+				FA75F19124C4C156004E81AC /* Countries.plist in Resources */,
 				FA2E663124C23C2000C4A07E /* Assets.xcassets in Resources */,
 				FA2E662C24C23C1E00C4A07E /* Main.storyboard in Resources */,
 			);

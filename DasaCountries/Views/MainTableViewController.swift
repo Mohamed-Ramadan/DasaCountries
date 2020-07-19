@@ -10,8 +10,7 @@ import UIKit
 import CoreLocation
 
 class MainTableViewController: UITableViewController {
-
-    //let mainViewModel = MainViewModel()
+ 
     let countryCellIdentifier = "countryCellIdentifier"
     let locationManager = CLLocationManager()
     var isLocationLoaded = false
