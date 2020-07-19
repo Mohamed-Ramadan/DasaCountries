@@ -44,7 +44,8 @@ class MainTableViewController: UITableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.didClickSearchButton))
         self.navigationItem.setRightBarButtonItems([addButton], animated: true)
         
-        self.tableView.isEditing = true
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        self.navigationItem.leftBarButtonItem = self.editButtonItem 
     }
     
     func getData() {  
@@ -157,6 +158,9 @@ extension MainTableViewController: CLLocationManagerDelegate {
                 if MainViewModel.shared.countriesArray.count == 0 {
                     let country = Country(status: nil, message: nil, name: placemark.country ?? "", capital: placemark.administrativeArea ?? "", currencies: [Currency(code: nil, name: "", symbol: "")])
                     MainViewModel.shared.addCountry(country)
+                    self.locationManager.stopUpdatingLocation()
+                } else {
+                    self.locationManager.stopUpdatingLocation()
                 }
                  
             }
